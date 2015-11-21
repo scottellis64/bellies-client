@@ -1,0 +1,6 @@
+/* Add here all your css styles (customizations) */
+.banner {
+    background: #ffffff url(../img/Bellies-Main-Page.jpg) no-repeat center top;
+    height : 1000px;
+    width : 100%;
+}
