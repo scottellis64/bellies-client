@@ -2,12 +2,13 @@ import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as CategoryActions from "../actions/CategoryActions";
+import * as FilterActions from "../actions/FilterActions";
 
 class FilterItem extends Component {
     static propTypes = {
         label : PropTypes.string,
         id : PropTypes.string,
-        actions : PropTypes.object
+        onSelected : PropTypes.func
     };
 
     render() {
@@ -15,7 +16,7 @@ class FilterItem extends Component {
             <li>
                 <label className="checkbox">
                     <input type="checkbox" name="checkbox"
-                           onClick={() => this.props.actions.selectCategory(this.props.id)}/>
+                           onClick={() => this.props.onSelected(this.props.id)}/>
                     <i></i>
                     {this.props.label}
                     <small>{this.props.count}</small>
@@ -56,21 +57,21 @@ class FilterGroup extends Component {
     }
 }
 
-function createFilterItemNodes(filters, actions, products) {
+function createFilterItemNodes(filters, mapKey, onSelected, products) {
     return filters.map(filter => {
         const filterID = filter.get("id");
-        const count = products.getIn(["pbc", filterID]);
+        const count = products.getIn([mapKey, filterID]);
         return (
-            <FilterItem key={filterID} id={filterID} label={filter.get("name")} actions={actions} count={count}/>
+            <FilterItem key={filterID} id={filterID} label={filter.get("name")} onSelected={onSelected} count={count}/>
         );
     });
 }
 
-function createFilterGroupNodes(groups, actions, products) {
+function createFilterGroupNodes(groups, onSelected, products) {
     return groups.map((group, key) => {
         return (
-            <FilterGroup key={key} label={group.get("name")} actions={actions} products={products}
-                filterItemNodes={createFilterItemNodes(group.get("items"), actions, products)}/>
+            <FilterGroup key={key} label={group.get("name")} products={products}
+                filterItemNodes={createFilterItemNodes(group.get("items"), "pbf", onSelected, products)}/>
         );
     });
 }
@@ -83,7 +84,8 @@ const mapProductFiltersStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    categoryActions : bindActionCreators(CategoryActions, dispatch)
+    categoryActions : bindActionCreators(CategoryActions, dispatch),
+    filterActions : bindActionCreators(FilterActions, dispatch)
 });
 
 class ProductFilters extends Component {
@@ -99,9 +101,8 @@ class ProductFilters extends Component {
             <div className="col-md-3 filter-by-block md-margin-bottom-60">
                 <h1>Filter By</h1>
                 <FilterGroup key="filterTypeCategory" label="Categories"
-                             filterItemNodes={createFilterItemNodes(this.props.categories, this.props.categoryActions, this.props.products)}
-                             products={this.props.products}/>
-                {createFilterGroupNodes(this.props.filters, this.props.categoryActions, this.props.products)}
+                             filterItemNodes={createFilterItemNodes(this.props.categories, "pbc", this.props.categoryActions.selectCategory, this.props.products)}/>
+                {createFilterGroupNodes(this.props.filters, this.props.filterActions.selectFilter, this.props.products)}
             </div>
         )
     }

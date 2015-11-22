@@ -13,4 +13,5 @@ export const SELECT_CATEGORY = "SELECT_CATEGORY";
 
 export const GET_FILTERS = "GET_FILTERS";
 export const GET_FILTER_BY_ID = "GET_FILTER_BY_ID";
+export const SELECT_FILTER = "SELECT_FILTER";
 export const SET_FILTERS = "SET_FILTERS";
