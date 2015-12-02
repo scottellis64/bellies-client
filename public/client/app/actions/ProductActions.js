@@ -5,8 +5,7 @@ import {
 
 export function products() {
     return {
-        type : GET_PRODUCTS,
-        meta : {remote : true}
+        type : GET_PRODUCTS
     };
 }
 

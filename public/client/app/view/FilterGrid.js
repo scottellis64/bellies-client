@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import * as ProductActions from "../actions/ProductActions";
 import {bindActionCreators} from "redux";
+
+import * as ProductActions from "../actions/ProductActions";
+import * as CategoryActions from "../actions/CategoryActions";
+import * as FilterActions from "../actions/FilterActions";
 
 import {
     BreadCrumbs,
@@ -9,15 +12,20 @@ import {
 } from "./index";
 
 const mapDispatchToProps = (dispatch) => ({
-    productActions : bindActionCreators(ProductActions, dispatch)
+    dispatch,
+    productActions : bindActionCreators(ProductActions, dispatch),
+    categoryActions : bindActionCreators(CategoryActions, dispatch),
+    filterActions : bindActionCreators(FilterActions, dispatch)
 });
 
 const mapStateToProps = (state) => ({
-    products : state.products.products
+    products : state.products
 });
 
 class FilterGrid extends Component {
     static propTypes = {
+        products : React.PropTypes.object,
+        filterActions : React.PropTypes.object,
         productActions : React.PropTypes.object
     };
 

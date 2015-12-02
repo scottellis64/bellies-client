@@ -6,8 +6,7 @@ import {
 
 export function categories() {
     return {
-        type : GET_CATEGORIES,
-        meta : {remote : true}
+        type : GET_CATEGORIES
     };
 }
 

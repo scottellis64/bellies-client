@@ -2,13 +2,12 @@ import {
     GET_FILTERS,
     SET_FILTERS,
     SELECT_FILTER,
-    TOGGLE_FILTER
+    FILTERS_SELECTED
 } from "../constants/ActionTypes";
 
 export function filters() {
     return {
-        type : GET_FILTERS,
-        meta : {remote : true}
+        type : GET_FILTERS
     };
 }
 
@@ -19,18 +18,18 @@ export function setFilters(filters) {
     };
 }
 
-export function selectFilter(filterID, selected=true) {
+export function selectFilter(parentID, filterID, selected=true) {
     return {
         type : SELECT_FILTER,
         id : filterID,
+        parentID,
         selected
     }
 }
 
-export function toggleFilter(filterID) {
+export function filtersSelected(filterIDs) {
     return {
-        type : TOGGLE_FILTER,
-        filterID,
-        meta : {remote : true}
-    };
+        type : FILTERS_SELECTED,
+        filterIDs
+    }
 }

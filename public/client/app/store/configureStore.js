@@ -8,17 +8,23 @@ import serverMiddleware     from "./bellies-server-middleware";
 import io                   from "socket.io-client";
 import {Map}                from "immutable";
 
-import {
-    setProducts
-} from "../actions/ProductActions";
+//import {
+//    setProducts
+//} from "../actions/ProductActions";
+//
+//import {
+//    setFilters,
+//    filtersSelected
+//} from "../actions/FilterActions"
+//
+//import {
+//    setCategories
+//} from "../actions/CategoryActions"
 
-import {
-    setFilters
-} from "../actions/FilterActions"
+import {products} from "../actions/ProductActions";
+import {filters} from "../actions/FilterActions"
+import {categories} from "../actions/CategoryActions";
 
-import {
-    setCategories
-} from "../actions/CategoryActions"
 
 import {
     applyMiddleware,
@@ -26,25 +32,29 @@ import {
     createStore
 } from "redux";
 
-const socket = io(`${location.protocol}//${location.hostname}:8090`);
-socket.on("state", state => {
-    if (state.products) {
-        store.dispatch(setProducts(state.products));
-    }
-
-    if (state.filters) {
-        store.dispatch(setFilters(state.filters));
-    }
-
-    if (state.categories) {
-        store.dispatch(setCategories(state.categories));
-    }
-});
+//const socket = io(`${location.protocol}//${location.hostname}:8090`);
+//socket.on("state", state => {
+//    if (state.products) {
+//        store.dispatch(setProducts(state.products));
+//    }
+//
+//    if (state.filters) {
+//        store.dispatch(setFilters(state.filters));
+//    }
+//
+//    if (state.categories) {
+//        store.dispatch(setCategories(state.categories));
+//    }
+//
+//    if (state.selectedFilters) {
+//        store.dispatch(filtersSelected(state.selectedFilters));
+//    }
+//});
 
 function configureStore(initialState = {}, debug = false) {
     let createStoreWithMiddleware;
 
-    const middleware = applyMiddleware(serverMiddleware(socket));
+    const middleware = applyMiddleware(serverMiddleware(null));
 
     if (debug) {
         createStoreWithMiddleware = compose(
@@ -66,4 +76,15 @@ function configureStore(initialState = {}, debug = false) {
 
 
 const store = configureStore({}, true);
+
+//
+// Load all filters and categories
+//
+store.dispatch(filters());
+store.dispatch(categories());
+
+// Load all products, but see the to-do below
+// todo: eventually products will only be loaded when selected filters and/or categories change and will not need to occur explicitly
+store.dispatch(products());
+
 export default store;
