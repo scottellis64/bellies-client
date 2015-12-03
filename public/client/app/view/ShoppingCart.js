@@ -27,8 +27,7 @@ export default class ShoppingCart extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="col-xs-6">
-                                    <a href="#" className="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">View
-                                        Cart</a>
+                                    <a href="#" className="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">View Cart</a>
                                 </div>
                                 <div className="col-xs-6">
                                     <a href="#" className="btn-u btn-u-sea-shop btn-block">Checkout</a>

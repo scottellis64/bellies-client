@@ -4,7 +4,7 @@ import {Link} from "react-router";
 class MenuItem extends Component {
     render() {
         return (
-            <li><Link to={`${this.props.path}`}>{this.props.label}</Link></li>
+            <li><Link key={`${this.props.key}` + "_link"} to={`${this.props.path}`}>{this.props.label}</Link></li>
         );
     }
 }

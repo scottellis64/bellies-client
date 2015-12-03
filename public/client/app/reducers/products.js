@@ -7,33 +7,25 @@ import {
 import {
     SET_PRODUCTS,
     GET_PRODUCTS,
-    GET_PRODUCTS_BY_CATEGORY,
     GET_FILTERS,
     SET_FILTERS,
-    SELECT_FILTER,
-    GET_CATEGORIES,
-    SET_CATEGORIES,
-    SELECT_CATEGORY
+    SELECT_FILTER
 } from "../constants/ActionTypes";
 
 import productData from "../data/productData";
 import FilterManager from "./FilterManager";
-import CategoryManager from "./CategoryManager";
 
 class ProductsManager {
     data = productData;
 
     initialState = Map();
     filterManager = null;
-    categoryManager = null;
 
     productsKey = ["products"];
     pbfKey = ["pbf"];
-    pbcKey = ["pbc"];
 
     constructor(options) {
         this.filterManager = new FilterManager();
-        this.categoryManager = new CategoryManager();
     }
 
     //
@@ -80,8 +72,7 @@ class ProductsManager {
     }
 
     setProducts(state, products) {
-        return this.updateProductsByCategoryMap(
-            this.updateProductsByFilterMap(state.set("products", products)));
+        return this.updateProductsByFilterMap(state.set("products", products));
     }
 
     static isFilterSelected(state, filterID) {
@@ -89,57 +80,26 @@ class ProductsManager {
     }
 
     filterProductsBySelectedFilters(state) {
-        //this.setProducts(this.data.get("productsByID").filter(product =>
-        //    product.get("filters").some(filterID => pbf.some(filter => filter.selected))
-        //));
+        const allProducts = this.data.get("productsByID");
+        const selectedFilters = ProductsManager.getSelectedFilters(state);
+        const selectedFiltersCount = selectedFilters.count();
 
-        const prd = this.data.get("productsByID").filter(product => {
-            let hasFilter = false;
-            product.get("filters").some(filterID => {
-                if (ProductsManager.isFilterSelected(state, filterID)) {
-                    hasFilter = true;
-                    return true;
-                }
-            });
+        if (selectedFiltersCount == 0) {
+            return this.setProducts(state, allProducts);
+        }
 
-            return hasFilter;
-        });
-
-        return this.setProducts(state, prd);
-    }
-
-    //
-    // Maps category to the number of items per category there are
-    //
-    updateProductsByCategoryMap(state) {
-        let pbcMap = Map();
-        state = state.setIn(this.pbcKey, pbcMap);
-
-        state.getIn(this.productsKey).forEach(product => {
-            let categories = product.get("categories");
-            if (categories) {
-                categories.forEach(category => {
-                    if (! pbcMap.has(category)) {
-                        pbcMap = pbcMap.set(category, fromJS({
-                            count : 1,
-                            selected : false
-                        }));
-                    } else {
-                        let categoryState = pbcMap.get(category);
-                        pbcMap = pbcMap.set(category, fromJS({
-                            count : categoryState.get("count") + 1,
-                            selected : categoryState.get("selected")
-                        }));
-                    }
-                });
-            }
-        });
-
-        return state.setIn(this.pbcKey, pbcMap);
+        return this.setProducts(state, allProducts.filter(product => {
+            const productFilters = product.get("filters").filter(filter => selectedFilters.has(filter));
+            return productFilters.count() == selectedFiltersCount;
+        }));
     }
 
     static selectFilter(state, filterID, selected) {
         return state.setIn(["pbf", filterID, "selected"], selected);
+    }
+
+    static getSelectedFilters(state) {
+        return state.get("pbf").filter(filter => filter.get("selected")).map((filter, key) => { return key; });
     }
 
     onDispatch(state = this.initialState, action = {type : "NONE"}) {
@@ -150,11 +110,6 @@ class ProductsManager {
             case SET_PRODUCTS :
                 return this.setProducts(state, fromJS(action.products));
 
-            case GET_PRODUCTS_BY_CATEGORY :
-                return this.setProducts(this.data.get("productsByID").filter((product) => {
-                    return product.get("categories").includes(action.categoryID)
-                }));
-
             case GET_FILTERS :
                 return this.filterManager.getAllFilters(state);
 
@@ -164,15 +119,6 @@ class ProductsManager {
             case SELECT_FILTER :
                 return this.filterProductsBySelectedFilters(
                     ProductsManager.selectFilter(state, action.id, action.selected));
-
-            case GET_CATEGORIES :
-                return this.categoryManager.getCategories(state);
-
-            case SET_CATEGORIES :
-                return CategoryManager.setCategories(state, action.categories);
-
-            case SELECT_CATEGORY :
-                return CategoryManager.selectCategory(state);
         }
 
         return state;

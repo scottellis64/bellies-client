@@ -23,7 +23,6 @@ import {Map}                from "immutable";
 
 import {products} from "../actions/ProductActions";
 import {filters} from "../actions/FilterActions"
-import {categories} from "../actions/CategoryActions";
 
 
 import {
@@ -81,7 +80,6 @@ const store = configureStore({}, true);
 // Load all filters and categories
 //
 store.dispatch(filters());
-store.dispatch(categories());
 
 // Load all products, but see the to-do below
 // todo: eventually products will only be loaded when selected filters and/or categories change and will not need to occur explicitly

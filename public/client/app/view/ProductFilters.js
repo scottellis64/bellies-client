@@ -4,7 +4,6 @@ import {List} from "immutable";
 
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import * as CategoryActions from "../actions/CategoryActions";
 import * as FilterActions from "../actions/FilterActions";
 
 class FilterItem extends Component {
@@ -62,45 +61,39 @@ class FilterGroup extends Component {
     }
 }
 
-function createFilterItemNodes(filters, mapKey, onSelected, products) {
+function createFilterItemNodes(filters, onSelected, products) {
     return filters.map(filter => {
         const filterID = filter.get("id");
         const parentID = filter.get("parentID");
-        const count = products.getIn([mapKey, filterID, "count"]);
-        const selected = products.getIn([mapKey, filterID, "selected"]);
+        const count = products.getIn(["pbf", filterID, "count"]);
+        const selected = products.getIn(["pbf", filterID, "selected"]);
+
         return (
             <FilterItem key={filterID} id={filterID} parentID={parentID} label={filter.get("name")} onSelected={onSelected} count={count} selected={selected}/>
         );
     });
 }
 
-function createFilterGroupNodes(groups, onSelected, products) {
-    return groups.map((group, key) => {
+function createFilterGroupNodes(products, onSelected) {
+    return products.get("filters").map((group, key) => {
         return (
             <FilterGroup key={key} label={group.get("name")} products={products}
-                filterItemNodes={createFilterItemNodes(group.get("items"), "pbf", onSelected, products)}/>
+                filterItemNodes={createFilterItemNodes(group.get("items"), onSelected, products)}/>
         );
     });
 }
 
 const mapProductFiltersStateToProps = (state) => ({
-    products : state.products,
-    categories : state.products.get("categories"),
-    categoryImageFolder : state.products.getIn(["categories", "imageFolder"]),
-    filters : state.products.get("filters")
+    products : state.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
     dispatch,
-    categoryActions : bindActionCreators(CategoryActions, dispatch),
     filterActions : bindActionCreators(FilterActions, dispatch)
 });
 
 class ProductFilters extends Component {
     static propTypes = {
-        categoryImageFolder : PropTypes.string,
-        categories : PropTypes.object,
-        filters : PropTypes.object,
         products : PropTypes.object
     };
 
@@ -108,9 +101,7 @@ class ProductFilters extends Component {
         return (
             <div className="col-md-3 filter-by-block md-margin-bottom-60">
                 <h1>Filter By</h1>
-                <FilterGroup key="filterTypeCategory" label="Categories"
-                             filterItemNodes={createFilterItemNodes(this.props.categories.get("categories"), "pbc", this.props.categoryActions.selectCategory, this.props.products)}/>
-                {createFilterGroupNodes(this.props.filters, this.props.filterActions.selectFilter, this.props.products)}
+                {createFilterGroupNodes(this.props.products, this.props.filterActions.selectFilter)}
             </div>
         )
     }

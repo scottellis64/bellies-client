@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 import * as ProductActions from "../actions/ProductActions";
-import * as CategoryActions from "../actions/CategoryActions";
 import * as FilterActions from "../actions/FilterActions";
 
 import {
@@ -14,7 +13,6 @@ import {
 const mapDispatchToProps = (dispatch) => ({
     dispatch,
     productActions : bindActionCreators(ProductActions, dispatch),
-    categoryActions : bindActionCreators(CategoryActions, dispatch),
     filterActions : bindActionCreators(FilterActions, dispatch)
 });
 
