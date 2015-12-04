@@ -1,8 +1,6 @@
 import {fromJS, Map} from "immutable";
 
 export default fromJS({
-    rootImageFolder: "/bellies/resources/img/categories",
-
     filtersByID: {
         filterBracelets: {label: "Bracelets"},
         filterNecklaces: {label: "Necklaces"},

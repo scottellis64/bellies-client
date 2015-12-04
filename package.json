@@ -4,8 +4,10 @@
   "description": "Bellies Bangles Client and Server Applications",
   "author": "J. Scott Ellis",
   "scripts": {
-    "server-tests": "karma start karma.conf.js"
+    "start" : "node public/server/web/index.js",
+    "postinstall" : "jspm install"
   },
+  "main" : "public/server/web/index.js",
   "jspm": {
     "directories": {
       "app": "public/client/app",
