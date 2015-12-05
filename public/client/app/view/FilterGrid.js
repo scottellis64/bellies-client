@@ -108,7 +108,7 @@ class ProductView extends Component {
             <div className="col-md-4">
                 <div className="product-img product-img-brd">
                     <a href="#"><img className="full-width img-responsive" src={imageSrc} alt=""/></a>
-                    <a className="product-review" href="#">Quick review</a>
+                    {/*<a className="product-review" href="#">Quick review</a>*/}
                     <a className="add-to-cart" href="#"><i className="fa fa-shopping-cart"></i>Add to cart</a>
                     {/* <div className="shop-rgba-dark-green rgba-banner">New</div> */}
                 </div>
