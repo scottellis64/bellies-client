@@ -4,10 +4,10 @@
   "description": "Bellies Bangles Client and Server Applications",
   "author": "J. Scott Ellis",
   "scripts": {
-    "start" : "node public/server/web/index.js",
-    "postinstall" : "jspm install"
+    "start": "node public/server/web/index.js",
+    "postinstall": "jspm install"
   },
-  "main" : "public/server/web/index.js",
+  "main": "public/server/web/index.js",
   "jspm": {
     "directories": {
       "app": "public/client/app",
@@ -45,19 +45,7 @@
     }
   },
   "devDependencies": {
-    "isparta": "^3.0.3",
-    "istanbul": "gotwarlost/istanbul.git#source-map",
-    "jasmine": "^2.3.1",
-    "jasmine-core": "^2.3.4",
-    "jspm": "^0.16.14",
-    "karma": "^0.13.14",
-    "karma-babel-preprocessor": "^5.2.1",
-    "karma-coverage": "douglasduteil/karma-coverage#next",
-    "karma-jasmine": "^0.3.6",
-    "karma-jspm": "^2.0.2",
-    "karma-phantomjs-launcher": "^0.2.0",
-    "karma-sourcemap-loader": "^0.3.5",
-    "phantomjs": "^1.9.17"
+    "jspm": "^0.16.14"
   },
   "dependencies": {
     "babel": "^5.8.29",
