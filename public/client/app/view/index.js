@@ -10,6 +10,10 @@ export { default as RegisterAccount } from "./RegisterAccount";
 export { default as ShoppingCart } from "./ShoppingCart";
 export { default as TopBar } from "./TopBar";
 
+export { default as ProductRating } from "./ProductRating";
+export { default as FilterGridViewController } from "./FilterGridViewController";
+export { default as GridPaginationViewController } from "./GridPaginationViewController";
+
 export { default as Banner } from "./Banner";
 export { default as Login } from "./Login";
 

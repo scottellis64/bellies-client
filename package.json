@@ -5,7 +5,8 @@
   "author": "J. Scott Ellis",
   "scripts": {
     "start": "node public/server/web/index.js",
-    "postinstall": "jspm install"
+    "jspm" : "node_modules/.bin/jspm",
+    "postinstall": "npm run jspm install"
   },
   "main": "public/server/web/index.js",
   "jspm": {

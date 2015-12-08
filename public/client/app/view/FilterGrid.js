@@ -8,97 +8,11 @@ import * as FilterActions from "../actions/FilterActions";
 
 import {
     BreadCrumbs,
-    ProductFilters
+    FilterGridViewController,
+    GridPaginationViewController,
+    ProductFilters,
+    ProductRating
 } from "./index";
-
-class FilterGridViewController extends Component {
-    render() {
-        return (
-            <div className="row margin-bottom-5">
-                <div className="col-sm-4 result-category">
-                    <h2></h2>
-                    <small className="shop-bg-red badge-results">{this.props.products.count()} Results</small>
-                </div>
-                {/*
-                <div className="col-sm-8">
-                    <ul className="list-inline clear-both">
-                        <li className="grid-list-icons">
-                            <a href="shop-ui-filter-list.html"><i className="fa fa-th-list"></i></a>
-                            <a href="shop-ui-filter-grid.html"><i className="fa fa-th"></i></a>
-                        </li>
-                        <li className="sort-list-btn">
-                            <h3>Sort By :</h3>
-
-                            <div className="btn-group">
-                                <button type="button" className="btn btn-default dropdown-toggle"
-                                        data-toggle="dropdown">
-                                    Popularity <span className="caret"></span>
-                                </button>
-                                <ul className="dropdown-menu" role="menu">
-                                    <li><a href="#">All</a></li>
-                                    <li><a href="#">Best Sales</a></li>
-                                    <li><a href="#">Top Last Week Sales</a></li>
-                                    <li><a href="#">New Arrived</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li className="sort-list-btn">
-                            <h3>Show :</h3>
-
-                            <div className="btn-group">
-                                <button type="button" className="btn btn-default dropdown-toggle"
-                                        data-toggle="dropdown">
-                                    20 <span className="caret"></span>
-                                </button>
-                                <ul className="dropdown-menu" role="menu">
-                                    <li><a href="#">All</a></li>
-                                    <li><a href="#">10</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">3</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                 */}
-            </div>
-        )
-    }
-}
-
-class ProductRating extends Component {
-    render() {
-        return (
-            <ul className="list-inline product-ratings">
-                <li><i className="rating-selected fa fa-star"></i></li>
-                <li><i className="rating-selected fa fa-star"></i></li>
-                <li><i className="rating-selected fa fa-star"></i></li>
-                <li><i className="rating fa fa-star"></i></li>
-                <li><i className="rating fa fa-star"></i></li>
-                <li className="like-icon"><a data-original-title="Add to wishlist"
-                                             data-toggle="tooltip" data-placement="left"
-                                             className="tooltips" href="#"><i
-                    className="fa fa-heart"></i></a></li>
-            </ul>
-        )
-    }
-}
-
-class GridPaginationViewController extends Component {
-    render() {
-        return (
-            <div className="text-center">
-                <ul className="pagination pagination-v2">
-                    <li><a href="#"><i className="fa fa-angle-left"></i></a></li>
-                    <li><a href="#">1</a></li>
-                    <li className="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i className="fa fa-angle-right"></i></a></li>
-                </ul>
-            </div>
-        )
-    }
-}
 
 class ProductView extends Component {
     render() {
@@ -227,7 +141,7 @@ class FilterGrid extends Component {
                     <ProductFilters />
 
                     <div className="col-md-9">
-                        <FilterGridViewController products={products}/>
+                        <FilterGridViewController count={products.count()}/>
 
                         <GridView products={products} />
 
