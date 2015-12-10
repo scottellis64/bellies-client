@@ -7,4 +7,6 @@
 
 # Ignore managed packages
 node_modules
-public/jspm_packages
+src/lib
+dist
+.openshift

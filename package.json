@@ -4,16 +4,16 @@
   "description": "Bellies Bangles Client and Server Applications",
   "author": "J. Scott Ellis",
   "scripts": {
-    "start": "node public/server/web/index.js",
-    "jspm" : "node_modules/.bin/jspm",
+    "start": "node server/bellies-http-server.js",
+    "jspm": "node_modules/.bin/jspm",
+    "buildjs": "npm run jspm bundle-sfx js/app dist/app.min.js --minify --skip-source-maps",
     "postinstall": "npm run jspm install"
   },
-  "main": "public/server/web/index.js",
+  "main": "dist/index.html",
   "jspm": {
     "directories": {
-      "app": "public/client/app",
-      "baseURL": "public",
-      "view": "public/client/app/view"
+      "baseURL": "src",
+      "packages": "src/lib"
     },
     "dependencies": {
       "babel": "npm:babel-core@5.8.29",
@@ -49,13 +49,9 @@
     "jspm": "^0.16.14"
   },
   "dependencies": {
-    "babel": "^5.8.29",
     "cors": "^2.7.1",
     "express": "^4.13.3",
-    "immutable": "^3.7.5",
-    "jade": "^1.11.0",
-    "redux": "^3.0.4",
-    "socket.io": "^1.3.7",
-    "systemjs": "^0.19.5"
+    "gulp": "^3.9.0",
+    "jade": "^1.11.0"
   }
 }
