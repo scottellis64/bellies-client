@@ -10,8 +10,8 @@ System.config({
     ]
   },
   paths: {
-    "github:*": "lib/github/*",
-    "npm:*": "lib/npm/*"
+    "github:*": "bellies/lib/github/*",
+    "npm:*": "bellies/lib/npm/*"
   },
 
   map: {
