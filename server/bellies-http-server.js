@@ -18,14 +18,10 @@ var routes = [{
 }];
 
 var staticResources = [
-    {path : "/", loc : "src"},
-    {path : "/bellies/lib", loc : "src/lib"},
-    {path : "/bellies/resources", loc : "src/resources"},
-    {path : "/bellies/app", loc : "src/js"},
-    {path : "/bellies/unify", loc : "src/resources/theme/Unify-v1.7/HTML/assets"}
+    {path : "/bellies", loc : "src"}
 ];
 
-var jadeTmplFolder = "src/resources/view";
+var jadeTmplFolder = "src/view";
 
 function _setupVariables() {
     ipaddress = process.env.OPENSHIFT_NODEJS_IP;

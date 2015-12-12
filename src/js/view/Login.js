@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import "/bellies/resources/css/log-reg-v3.css!";
-import "/bellies/resources/css/animate.css!";
-import "/bellies/resources/line-icons/line-icons.css!";
+import "/bellies/css/log-reg-v3.css!";
+import "/bellies/css/animate.css!";
+import "/bellies/css/line-icons/line-icons.css!";
 
 export default class Login extends Component {
     static title = "Login";

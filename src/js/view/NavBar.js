@@ -17,7 +17,7 @@ export default class NavBar extends React.Component {
                         </button>
 
                         <a className="navbar-brand" href="index.html">
-                            <img id="logo-header" src="/bellies/resources/img/BelliesBirdSolo.png" alt="Logo" height="50"/>
+                            <img id="logo-header" src="/bellies/img/BelliesBirdSolo.png" alt="Logo" height="50"/>
                         </a>
                     </div>
 

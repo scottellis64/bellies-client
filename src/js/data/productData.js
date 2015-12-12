@@ -1,7 +1,7 @@
 import {fromJS} from "immutable";
 
 export default fromJS({
-    rootProductImageFolder : "/bellies/resources/img/products",
+    rootProductImageFolder : "/bellies/img/products",
 
     productsByID : {
         "bclt-001" : {
