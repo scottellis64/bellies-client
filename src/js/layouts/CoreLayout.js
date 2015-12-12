@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 
 import "bootstrap/css/bootstrap.css!";
-import "/bellies/css/shop/shop.style.css!";
-import "/bellies/css/font-awesome.min.css!";
-import "/bellies/css/headers/header-v5.css!";
-import "/bellies/css/footers/footer-v4.css!";
-import "/bellies/css/custom.css!";
+import "/css/shop/shop.style.css!";
+import "/css/font-awesome.min.css!";
+import "/css/headers/header-v5.css!";
+import "/css/footers/footer-v4.css!";
+import "/css/custom.css!";
 
 export default class CoreLayout extends Component {
     static propTypes = {

@@ -10,21 +10,21 @@ const initialState = fromJS({
     itemsById : {
         "1" : {
             key : "1",
-            image : "/bellies/img/thumb/05.jpg",
+            image : "/img/thumb/05.jpg",
             name : "Watch",
             price : "400.00",
             qty : 2
         },
         "2" : {
             key : "2",
-            image : "/bellies/img/thumb/02.jpg",
+            image : "/img/thumb/02.jpg",
             name : "Black Glasses",
             price : "150.59",
             qty : 1
         },
         "3" : {
             key : "3",
-            image : "/bellies/img/thumb/03.jpg",
+            image : "/img/thumb/03.jpg",
             name : "Keys",
             price : "65.99",
             qty : 5

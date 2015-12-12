@@ -4,6 +4,13 @@ import {TopBar, NavBar, Banner} from "./index";
 import {bindActionCreators}     from "redux";
 import * as ShoppingCartActions from "../actions/ShoppingCartActions";
 
+import "bootstrap/css/bootstrap.css!";
+import "/css/shop/shop.style.css!";
+import "/css/font-awesome.min.css!";
+import "/css/headers/header-v5.css!";
+import "/css/footers/footer-v4.css!";
+import "/css/custom.css!";
+
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
 // export the decorated component after the main class definition so
@@ -29,15 +36,19 @@ class BelliesHome extends Component {
 
     render() {
         return (
-            <div className="belliesAppContainer">
-                <div className="wrapper">
-                    <div className="header-v5 header-static">
-                        <TopBar />
-                        <NavBar menudata={this.props.menudata} cart={this.props.cart}
-                                shoppingCartActions={this.props.shoppingCartActions}/>
+            <div className="page-container">
+                <div className="view-container">
+                    <div className="belliesAppContainer">
+                        <div className="wrapper">
+                            <div className="header-v5 header-static">
+                                <TopBar />
+                                <NavBar menudata={this.props.menudata} cart={this.props.cart}
+                                        shoppingCartActions={this.props.shoppingCartActions}/>
+                            </div>
+                        </div>
+                        {this.props.body || <Banner/>}
                     </div>
                 </div>
-                {this.props.body || <Banner/>}
             </div>
         );
     }

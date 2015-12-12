@@ -8,31 +8,31 @@ const initialState = fromJS({
         items: [{
             key: "miLogin",
             label: "Login",
-            path : "/bellies/login"
+            path : "/login"
         },{
             key: "miHome",
             label: "Home",
-            path : "/bellies"
+            path : ""
         },{
             key: "miCheckOut",
             label: "Check Out",
-            path : "/bellies/checkout"
+            path : "/checkout"
         },{
             key: "miProduct",
             label: "Product",
-            path : "/bellies/product"
+            path : "/product"
         },{
             key: "miFilterGrid",
             label: "Filter Grid",
-            path : "/bellies/fgrid"
+            path : "/fgrid"
         },{
             key: "miFilterList",
             label: "Filter List",
-            path : "/bellies/flist"
+            path : "/flist"
         },{
             key: "miRegister",
             label: "Register",
-            path : "/bellies/register"
+            path : "/register"
         }]
     }]
 });

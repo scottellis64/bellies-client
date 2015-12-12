@@ -18,7 +18,7 @@ var routes = [{
 }];
 
 var staticResources = [
-    {path : "/bellies", loc : "src"}
+    {path : "/", loc : "src"}
 ];
 
 var jadeTmplFolder = "src/view";
@@ -81,7 +81,7 @@ for (i in routes) {
     var route = routes[i];
     for (var j in route.paths) {
         var path = route.paths[j];
-        var resourcePath = path.length ? "/bellies/" + path : "/bellies";
+        var resourcePath = path.length ? "/" + path : "/";
         app.get(resourcePath, function(req, res) {
             res.render(route.name, route.properties);
         });

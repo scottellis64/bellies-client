@@ -10,19 +10,19 @@ export default class MasterSlider extends Component {
         return (
             <div className="master-slider ms-skin-default" id="masterslider">
                 <div className="ms-slide">
-                    <img className="ms-brd" src="/bellies/img/blank.gif"
-                         data-src="/bellies/img/products/28.jpg" alt="lorem ipsum dolor sit" />
-                    <img className="ms-thumb" src="/bellies/img/products/28-thumb.jpg" alt="thumb" />
+                    <img className="ms-brd" src="/img/blank.gif"
+                         data-src="/img/products/28.jpg" alt="lorem ipsum dolor sit" />
+                    <img className="ms-thumb" src="/img/products/28-thumb.jpg" alt="thumb" />
                 </div>
                 <div className="ms-slide">
-                    <img src="/bellies/img/blank.gif" data-src="/bellies/img/products/29.jpg"
+                    <img src="/img/blank.gif" data-src="/img/products/29.jpg"
                          alt="lorem ipsum dolor sit" />
-                    <img className="ms-thumb" src="/bellies/img/products/29-thumb.jpg" alt="thumb" />
+                    <img className="ms-thumb" src="/img/products/29-thumb.jpg" alt="thumb" />
                 </div>
                 <div className="ms-slide">
-                    <img src="/bellies/img/blank.gif" data-src="/bellies/img/products/30.jpg"
+                    <img src="/img/blank.gif" data-src="/img/products/30.jpg"
                          alt="lorem ipsum dolor sit" />
-                    <img className="ms-thumb" src="/bellies/img/products/30-thumb.jpg" alt="thumb" />
+                    <img className="ms-thumb" src="/img/products/30-thumb.jpg" alt="thumb" />
                 </div>
             </div>
         );

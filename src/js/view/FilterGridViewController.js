@@ -12,8 +12,8 @@ export default class FilterGridViewController extends Component {
                 <div className="col-sm-8">
                     <ul className="list-inline clear-both">
                         <li className="grid-list-icons">
-                            <Link key="link_to_fgrid" to="/bellies/fgrid"><i className="fa fa-th-list"></i></Link>
-                            <Link key="link_to_flist" to="/bellies/flist"><i className="fa fa-th"></i></Link>
+                            <Link key="link_to_fgrid" to="/fgrid"><i className="fa fa-th-list"></i></Link>
+                            <Link key="link_to_flist" to="/flist"><i className="fa fa-th"></i></Link>
                         </li>
 
                         {/*

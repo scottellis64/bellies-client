@@ -1,7 +1,7 @@
 import {fromJS} from "immutable";
 
 export default fromJS({
-    rootImageFolder: "/bellies/img/categories",
+    rootImageFolder: "/img/categories",
     categoriesByID: {
         "bclt": {
             parents: null,

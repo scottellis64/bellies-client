@@ -16,7 +16,7 @@ import {
 
 class ProductView extends Component {
     render() {
-        const imageSrc = "/bellies/img/products/thumbnails/" + this.props.id + ".jpg";
+        const imageSrc = "/img/products/thumbnails/" + this.props.id + ".jpg";
 
         return (
             <div className="col-md-4">

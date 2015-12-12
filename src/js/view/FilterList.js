@@ -16,7 +16,7 @@ import {
 
 class ProductRow extends Component {
     render() {
-        const imageSrc = "/bellies/img/products/thumbnails/" + this.props.id + ".jpg";
+        const imageSrc = "/img/products/thumbnails/" + this.props.id + ".jpg";
 
         return (
             <div>
