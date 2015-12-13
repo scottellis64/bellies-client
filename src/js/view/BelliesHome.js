@@ -4,12 +4,12 @@ import {TopBar, NavBar, Banner} from "./index";
 import {bindActionCreators}     from "redux";
 import * as ShoppingCartActions from "../actions/ShoppingCartActions";
 
-import "bootstrap/css/bootstrap.css!";
-import "/css/shop/shop.style.css!";
-import "/css/font-awesome.min.css!";
-import "/css/headers/header-v5.css!";
-import "/css/footers/footer-v4.css!";
-import "/css/custom.css!";
+//import "bootstrap/css/bootstrap.css!";
+//import "/css/shop/shop.style.css!";
+//import "/css/font-awesome.min.css!";
+//import "/css/headers/header-v5.css!";
+//import "/css/footers/footer-v4.css!";
+//import "/css/custom.css!";
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then

@@ -79,7 +79,6 @@
 }
 
 .log-reg-v3 .checkbox {
-	color: #999;
 	margin-top: 0;
 	color: #687074;
 	cursor: pointer;
@@ -102,9 +101,8 @@
 	outline: none;
 	display: block;
 	background: #fff;
-	border-width: 2px;
 	position: absolute;
-	border-style: solid;
+	border: 2px solid;
 }
 
 .log-reg-v3 .checkbox input + i:after {

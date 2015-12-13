@@ -8,5 +8,4 @@
 # Ignore managed packages
 node_modules
 src/lib
-dist
 .openshift

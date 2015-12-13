@@ -149,11 +149,11 @@
 
 #topcontrol:after {
   /*top: -2px;*/
-  left: 8.5px;
+  left: 9px;
   content: "\f106";
   position: absolute;
   text-align: center;
-  font-family: FontAwesome;
+  font-family: FontAwesome, serif;
 }
 
 #topcontrol:hover {

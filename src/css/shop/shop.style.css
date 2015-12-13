@@ -6,9 +6,9 @@
  * Website: http://htmlstream.com
 */
 /*Import Global Compulsory CSS Files*/
-@import url(app.css);
-@import url(shop.plugins.css);
-@import url(shop.blocks.css);
+@import url(./app.css);
+@import url(./shop.plugins.css);
+@import url(./shop.blocks.css);
 
 * {
     font-family: 'Open Sans', sans-serif;
@@ -491,8 +491,7 @@ li:first-child {
     padding: 50px 0;
     position: relative;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: no-repeat center center;
     /*background-image: url(../img/collection-bg.jpg);*/
 }
 
@@ -1000,12 +999,11 @@ li:first-child {
     outline: none;
     cursor: pointer;
     font-size: 20px;
-    background: #eee;
     text-align: center;
     font-weight: normal;
     white-space: nowrap;
     display: inline-block;
-    background-image: none;
+    background: #eee none;
 }
 
 .shop-product .quantity-field {
@@ -1349,9 +1347,8 @@ li:first-child {
     outline: none;
     display: block;
     background: #fff;
-    border-width: 2px;
     position: absolute;
-    border-style: solid;
+    border: 2px solid;
 }
 
 .checkbox-list .checkbox input + i:after {
@@ -1411,9 +1408,9 @@ li:first-child {
 }
 
 .slider-snap.noUi-background {
-    -webkit-box-shadow: inset 0px 1px 1px 0px #b5b5b5;
-    -moz-box-shadow: inset 0px 1px 1px 0px #b5b5b5;
-    box-shadow: inset 0px 1px 1px 0px #b5b5b5;
+    -webkit-box-shadow: inset 0 1px 1px 0 #b5b5b5;
+    -moz-box-shadow: inset 0 1px 1px 0 #b5b5b5;
+    box-shadow: inset 0 1px 1px 0 #b5b5b5;
 }
 
 .slider-snap.noUi-connect {
@@ -1579,7 +1576,7 @@ li:first-child {
 }
 
 .sort-list-btn .dropdown-menu {
-    box-shadow: 0 5px 5px 0px rgba(90, 90, 90, 0.075);
+    box-shadow: 0 5px 5px 0 rgba(90, 90, 90, 0.075);
 }
 
 .sort-list-btn .dropdown-menu li a {
@@ -1796,12 +1793,11 @@ li:first-child {
     outline: none;
     cursor: pointer;
     font-size: 18px;
-    background: #eee;
     text-align: center;
     font-weight: normal;
     white-space: nowrap;
     display: inline-block;
-    background-image: none;
+    background: #eee none;
 }
 
 .shopping-cart .quantity-field {
