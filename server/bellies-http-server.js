@@ -1,93 +1,103 @@
 var express = require("express");
 var cors = require("cors");
 
-var defaultPort = 8080;                 // Port to use if none is provided
-var defaultIPAddress = "127.0.0.1";     // IP address to use if none is provided
-var ipaddress = null;
-var port = null;
+var BelliesHttpServer = function() {
+    var self = this;
 
-app = express();
+    self.defaultPort = 3001;                 // Port to use if none is provided
+    self.defaultIPAddress = "127.0.0.1";     // IP address to use if none is provided
 
-var routes = [{
-    name: "bellies-home",
-    paths: ["", "checkout", "flist", "fgrid", "login", "product", "register"],
-    properties: {
-        layout: "bellies-home.jade",
-        title: "Bellies Bangles"
-    }
-}];
+    self.routes = [{
+        name: "bellies-home",
+        paths: ["", "checkout", "flist", "fgrid", "login", "product", "register"],
+        properties: {
+            layout: "bellies-home.jade",
+            title: "Bellies Bangles"
+        }
+    }];
 
-var staticResources = [
-    {path : "/", loc : "src"}
-];
+    self.staticResources = [
+        {path : "/", loc : "src"}
+    ];
 
-var jadeTmplFolder = "src/view";
+    self.jadeTmplFolder = "src/view";
 
-function _setupVariables() {
-    ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-    port      = process.env.OPENSHIFT_NODEJS_PORT || this.defaultPort;
+    self._setupVariables = function() {
+        self.ipaddress = process.env.OPENSHIFT_NODEJS_IP || self.defaultIPAddress;
+        self.port      = process.env.OPENSHIFT_NODEJS_PORT || self.defaultPort;
+    };
 
-    if (ipaddress) {
-        console.warn("No OPENSHIFT_NODEJS_IP var, using " + defaultIPAddress);
-        ipaddress = defaultIPAddress;
-    }
-}
+    self.terminator = function(sig) {
+        var date = Date(Date.now());
+        if (typeof sig === "string") {
+            console.log('%s: Received %s - terminating sample app ...', date, sig);
+            process.exit(1);
+        }
+        console.log('%s: Node server stopped.', date);
+    };
 
-function terminator(sig) {
-    var date = Date(Date.now());
-    if (typeof sig === "string") {
-        console.log('%s: Received %s - terminating sample app ...', date, sig);
-        process.exit(1);
-    }
-    console.log('%s: Node server stopped.', date);
-}
+    self._setupTerminationHandlers = function() {
+        process.on('exit', function() {
+            self.terminator();
+        });
 
-
-function _setupTerminationHandlers() {
-    process.on('exit', function() {
-        terminator();
-    });
-
-    // Removed 'SIGPIPE' from the list - bugz 852598.
-    ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT', 'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV',
-        'SIGUSR2', 'SIGTERM'
-    ].forEach(function(element) {
-            process.on(element, function() {
-                terminator(element);
+        // Removed 'SIGPIPE' from the list - bugz 852598.
+        ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
+         'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
+        ].forEach(function(element) {
+                process.on(element, function() {
+                    self.terminator(element);
+                });
             });
+    };
+
+    self.initializeServer = function() {
+        var i;
+
+        self.app = express();
+        self.app.use(cors());
+
+        for (i in self.staticResources) {
+            var res = self.staticResources[i];
+            self.app.use(res.path, express.static(res.loc));
+        }
+
+        for (i in self.routes) {
+            var route = self.routes[i];
+            for (var j in route.paths) {
+                var path = route.paths[j];
+                var resourcePath = path.length ? "/" + path : "/";
+                self.app.get(resourcePath, function(req, res) {
+                    res.render(route.name, route.properties);
+                });
+            }
+        }
+
+        self._initializeJade();
+    };
+
+    self._initializeJade = function() {
+        self.app.set("views", self.jadeTmplFolder);
+        self.app.set("view engine", "jade");
+        self.app.disable("view cache");
+    };
+
+    self.initialize = function() {
+        self._setupVariables();
+        self._setupTerminationHandlers();
+
+        // Create the express server and routes.
+        self.initializeServer();
+    };
+
+    self.start = function() {
+        self.app.listen(self.port, self.ipaddress, function() {
+            console.log('%s: Node server started on %s:%d ...',
+                Date(Date.now() ), self.ipaddress, self.port);
         });
-}
+    };
+};
 
-function _initializeJade() {
-    app.set("views", jadeTmplFolder);
-    app.set("view engine", "jade");
-    app.disable("view cache");
-}
-
-_setupVariables();
-_setupTerminationHandlers();
-
-app.use(cors());
-
-_initializeJade();
-
-var i;
-for (i in staticResources) {
-    var res = staticResources[i];
-    app.use(res.path, express.static(res.loc));
-}
-
-for (i in routes) {
-    var route = routes[i];
-    for (var j in route.paths) {
-        var path = route.paths[j];
-        var resourcePath = path.length ? "/" + path : "/";
-        app.get(resourcePath, function(req, res) {
-            res.render(route.name, route.properties);
-        });
-    }
-}
-
-app.listen(3001);
-
-module.exports = app;
+var belliesHttpServer = new BelliesHttpServer();
+belliesHttpServer.initialize();
+belliesHttpServer.start();
