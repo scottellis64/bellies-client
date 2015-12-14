@@ -7,7 +7,7 @@
     "start": "node server/bellies-http-server.js",
     "buildjs": "jspm bundle-sfx js/app src/dist/app.min.js --minify --skip-source-maps"
   },
-  "main": "dist/index.html",
+  "main": "server/bellies-http-server.js",
   "jspm": {
     "directories": {
       "baseURL": "src",
