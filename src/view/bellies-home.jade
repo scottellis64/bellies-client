@@ -3,6 +3,8 @@ extends bellies-tmpl
 block content
     div(id="container")
 
-    //script.
-    //    System.import("/js/app");
-    script(src="/dist/app.min.js")
+    if locals.isProduction
+        script(src="/dist/app.min.js")
+    else
+        script.
+            System.import("/js/app");

@@ -7,10 +7,13 @@ head
 
     title #{title}
     link(rel="shortcut icon", href="/img/favicon.ico")
-    link(rel="stylesheet", href="/dist/belliesapp.css")
 
-    //script(src="/lib/system.js")
-    //script(src="/config.js")
+    if locals.isProduction
+        link(rel="stylesheet", href="/dist/belliesapp.css")
+    else
+        link(rel="stylesheet", href="/css/belliesapp.css")
+        script(src="/lib/system.js")
+        script(src="/config.js")
 
 body(class="header-fixed")
     block content

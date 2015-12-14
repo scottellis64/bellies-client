@@ -12,7 +12,8 @@ var BelliesHttpServer = function() {
         paths: ["", "checkout", "flist", "fgrid", "login", "product", "register"],
         properties: {
             layout: "bellies-home.jade",
-            title: "Bellies Bangles"
+            title: "Bellies Bangles",
+            isProduction: process.env.NODE_ENV && process.env.NODE_ENV == "production"
         }
     }];
 
