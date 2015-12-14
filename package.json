@@ -5,7 +5,7 @@
   "author": "J. Scott Ellis",
   "scripts": {
     "start": "node server/bellies-http-server.js",
-    "buildjs": "jspm bundle-sfx js/app dist/app.min.js --minify --skip-source-maps"
+    "buildjs": "jspm bundle-sfx js/app src/dist/app.min.js --minify --skip-source-maps"
   },
   "main": "dist/index.html",
   "jspm": {
