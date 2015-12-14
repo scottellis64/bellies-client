@@ -10,10 +10,16 @@ head
 
     if locals.isProduction
         link(rel="stylesheet", href="/dist/belliesapp.css")
+        script.
+            localStorage.set("bellies.debug", "false");
+            localStorage.set("bellies.debugExternal", "false");
     else
         link(rel="stylesheet", href="/css/belliesapp.css")
         script(src="/lib/system.js")
         script(src="/config.js")
+        script.
+            localStorage.set("bellies.debug", "true");
+            localStorage.set("bellies.debugExternal", "true");
 
 body(class="header-fixed")
     block content

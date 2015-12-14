@@ -7,8 +7,8 @@ const target = document.getElementById("container");
 
 const node = (
     <Root store={store}
-          debug={true}
-          debugExternal={false}/>
+          debug={localStorage.get("bellies.debug") == "true"}
+          debugExternal={localStorage.get("bellies.debugExternal") == "true"}/>
 );
 
 ReactDOM.render(node, target);
