@@ -45,6 +45,8 @@
     }
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-minify-css": "^1.2.2",
     "jspm": "^0.16.14"
   },
   "dependencies": {
