@@ -9,7 +9,7 @@ var BelliesHttpServer = function() {
 
     self.routes = [{
         name: "bellies-home",
-        paths: ["", "checkout", "flist", "fgrid", "login", "product", "register"],
+        paths: ["", "checkout", "flist", "fgrid", "login", "product", "register", "cartitems", "billinginfo", "paymentmethod"],
         properties: {
             layout: "bellies-home.jade",
             title: "Bellies Bangles",

@@ -72,6 +72,7 @@ class ProductsManager {
     }
 
     setProducts(state, products) {
+        console.log("setProducts called");
         return this.updateProductsByFilterMap(state.set("products", products));
     }
 
@@ -105,6 +106,7 @@ class ProductsManager {
     onDispatch(state = this.initialState, action = {type : "NONE"}) {
         switch (action.type) {
             case GET_PRODUCTS :
+                console.log("getProducts called");
                 return this.setProducts(state, this.data.get("productsByID"));
 
             case SET_PRODUCTS :

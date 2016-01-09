@@ -1,11 +1,12 @@
-import {ADD, UPDATE, DELETE} from "../constants/ActionTypes";
+import {ADD, UPDATE, DELETE, GET_CART} from "../constants/ActionTypes";
 
-export function addItem(id, name, qty) {
+export function addItem(id, name, qty, price) {
     return {
         key : id,
         type : ADD,
         name,
-        qty : qty
+        qty,
+        price
     };
 }
 
@@ -16,10 +17,16 @@ export function deleteItem(id) {
     };
 }
 
-export function updateItem(id, name, qty) {
+export function updateItem(id, qty) {
     return {
         key : id,
         type : UPDATE,
-        qty : qty
+        qty
     };
+}
+
+export function shoppingCart() {
+    return {
+        type : GET_CART
+    }
 }

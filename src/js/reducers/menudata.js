@@ -15,8 +15,12 @@ const initialState = fromJS({
             path : ""
         },{
             key: "miCheckOut",
-            label: "Check Out",
+            label: "Checkout Page All",
             path : "/checkout"
+        },{
+            key: "miCheckOutItems",
+            label: "Check Out",
+            path : "/cartitems"
         },{
             key: "miProduct",
             label: "Product",

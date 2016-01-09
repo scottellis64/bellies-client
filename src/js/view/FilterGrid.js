@@ -3,8 +3,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {fromJS} from "immutable";
 
-import * as ProductActions from "../actions/ProductActions";
-import * as FilterActions from "../actions/FilterActions";
+import * as ShoppingCartActions from "../actions/ShoppingCartActions";
 
 import {
     BreadCrumbs,
@@ -23,7 +22,8 @@ class ProductView extends Component {
                 <div className="product-img product-img-brd">
                     <a href="#"><img className="full-width img-responsive" src={imageSrc} alt=""/></a>
                     {/*<a className="product-review" href="#">Quick review</a>*/}
-                    <a className="add-to-cart" href="#"><i className="fa fa-shopping-cart"></i>Add to cart</a>
+                    <a className="add-to-cart" onClick={() => this.props.addToCart(this.props.id, this.props.name, 1, this.props.price)}>
+                            <i className="fa fa-shopping-cart"></i>Add to cart</a>
                     {/* <div className="shop-rgba-dark-green rgba-banner">New</div> */}
                 </div>
                 <div className="product-description product-description-brd margin-bottom-30">
@@ -33,7 +33,7 @@ class ProductView extends Component {
                                 href="#">{this.props.name}</a></h4>
                         </div>
                         <div className="product-price">
-                            <span className="title-price">{this.props.price}</span>
+                            <span className="title-price">{`$${this.props.price}`}</span>
                         </div>
                     </div>
                     {/*<ProductRating />*/}
@@ -52,7 +52,8 @@ class GridRow extends Component {
 
         const productNodes = this.props.products.map(product => {
             return (
-                <ProductView id={product.get("id")} name={product.get("name")} price={product.get("price")} />
+                <ProductView id={product.get("id")} name={product.get("name")} price={product.get("price")}
+                             addToCart={this.props.addToCart}/>
             );
         });
 
@@ -89,7 +90,7 @@ class GridView extends Component {
                     return fromJS({
                         id,
                         name : product.get("name"),
-                        price : "$" + product.get("price")
+                        price : product.get("price")
                     })
                 })
             };
@@ -102,7 +103,8 @@ class GridView extends Component {
 
         const gridRowNodes = gridRows.map(gridRow => {
             return (
-                <GridRow key={gridRow.key} last={gridRow.last} products={gridRow.products} />
+                <GridRow key={gridRow.key} last={gridRow.last} products={gridRow.products}
+                         addToCart={this.props.addToCart}/>
             )
         });
 
@@ -116,8 +118,7 @@ class GridView extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     dispatch,
-    productActions : bindActionCreators(ProductActions, dispatch),
-    filterActions : bindActionCreators(FilterActions, dispatch)
+    shoppingCartActions : bindActionCreators(ShoppingCartActions, dispatch)
 });
 
 const mapStateToProps = (state) => ({
@@ -127,8 +128,7 @@ const mapStateToProps = (state) => ({
 class FilterGrid extends Component {
     static propTypes = {
         products : React.PropTypes.object,
-        filterActions : React.PropTypes.object,
-        productActions : React.PropTypes.object
+        shoppingCartActions : React.PropTypes.object
     };
 
     render() {
@@ -143,7 +143,7 @@ class FilterGrid extends Component {
                     <div className="col-md-9">
                         <FilterGridViewController count={products.count()}/>
 
-                        <GridView products={products} />
+                        <GridView products={products} addToCart={this.props.shoppingCartActions.addItem}/>
 
                         {/*<GridPaginationViewController products={products}/>*/}
                     </div>

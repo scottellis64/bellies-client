@@ -10,15 +10,21 @@ import {
     Login,
     Banner,
     CheckoutCart,
+    CheckoutReviewCart,
+    CheckoutBillingInfo,
+    CheckoutPaymentMethod,
     Product,
     FilterGrid,
     FilterList,
-    RegisterAccount
+    RegisterAccount,
 } from "../view/index";
 
 export default (
     <Route path="/" component={BelliesHome}>
         <Route path="checkout" components={{body : CheckoutCart}}/>
+        <Route path="cartitems" components={{body : CheckoutReviewCart}}/>
+        <Route path="billinginfo" components={{body : CheckoutBillingInfo}}/>
+        <Route path="paymentmethod" components={{body : CheckoutPaymentMethod}}/>
         <Route path="login" components={{body : Login}}/>
         <Route path="product" components={{body : Product}}/>
         <Route path="fgrid" components={{body : FilterGrid}}/>

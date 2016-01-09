@@ -1,5 +1,10 @@
 export { default as BelliesHome } from "./BelliesHome";
 export { default as CheckoutCart } from "./CheckoutCart";
+export { default as CheckoutCartTotals } from "./CheckoutCartTotals";
+export { default as CheckoutReviewCart } from "./CheckoutReviewCart";
+export { default as CheckoutBillingInfo } from "./CheckoutBillingInfo";
+export { default as CheckoutPaymentMethod } from "./CheckoutPaymentMethod";
+export { default as CheckoutWizardTabs } from "./CheckoutWizardTabs";
 export { default as FilterGrid } from "./FilterGrid";
 export { default as FilterList } from "./FilterList";
 export { default as MenuBar } from "./MenuBar";
