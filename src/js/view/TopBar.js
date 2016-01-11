@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
+import {Link} from "react-router";
 
-export default class TopBar extends React.Component {
+export default class TopBar extends Component {
     render() {
         return (
             <div className="topbar-v3">
@@ -9,10 +10,7 @@ export default class TopBar extends React.Component {
                         <div className="col-sm-6"></div>
                         <div className="col-sm-6">
                             <ul className="list-inline right-topbar pull-right">
-                                <li><a href="#">Account</a></li>
-                                <li><a href="#">Wishlist (0)</a></li>
-                                <li><a href="#">Login</a> | <a href="#">Register</a></li>
-                                <li><i className="search fa fa-search search-button"></i></li>
+                                <li><Link key="logintop_link" to="/login">Login</Link> | <Link key="registertop_link" to="/register">Register</Link></li>
                             </ul>
                         </div>
                     </div>

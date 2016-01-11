@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router";
 
 export default class RegisterAccount extends React.Component {
     render() {
@@ -7,7 +8,7 @@ export default class RegisterAccount extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-7 md-margin-bottom-50">
-                            <h2 className="welcome-title">Welcome to Unify</h2>
+                            <h2 className="welcome-title">Welcome to Bellies Bangles</h2>
                             <p>Suspendisse et tincidunt ipsum, et dignissim urna. Vestibulum nisl tortor, gravida at magna et, suscipit vehicula massa.</p><br/>
                             <div className="row margin-bottom-50">
                                 <div className="col-sm-4 md-margin-bottom-20">
@@ -31,7 +32,6 @@ export default class RegisterAccount extends React.Component {
                             </div>
                             <div className="members-number">
                                 <h3>Join more than <span className="shop-green">13,000</span> members worldwide</h3>
-                                <img className="img-responsive" src="assets/img/map.png" alt=""/>
                             </div>
                         </div>
 
@@ -127,7 +127,7 @@ export default class RegisterAccount extends React.Component {
                             </form>
 
                             <div className="margin-bottom-20"></div>
-                            <p className="text-center">Already you have an account? <a href="shop-ui-login.html">Sign In</a></p>
+                            <p className="text-center">Already you have an account? <Link key="login_register" to="/login">Sign In</Link></p>
                         </div>
                     </div>
                 </div>

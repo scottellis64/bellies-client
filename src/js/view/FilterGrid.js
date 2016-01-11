@@ -69,16 +69,21 @@ class GridView extends Component {
     render() {
 
         // total of all products
-        const count = this.props.products.count();
+        const numPageItems = this.props.paging.get("numPageItems");
 
         // Calculate the number of rows, which is the number of products divided by the number of products-per-row plus 1.
-        const numRows = count <= 3 ? 1 : Math.floor(count / 3) + 1;
+        const numRows = this.props.paging.get("numRows");
 
         // Calculate the number of products in the last row
-        const lastRowCount = count % 3;
+        const itemsPerRow = this.props.paging.get("itemsPerRow");
+        let lastRowCount = numPageItems % itemsPerRow;
+        if (! lastRowCount) {
+            lastRowCount = itemsPerRow;
+        }
 
         let gridRows = [];
-        let productIndex = 0, nextProductIndex = 0;
+        const startIndex = this.props.paging.get("startIndex");
+        let productIndex = startIndex, nextProductIndex = startIndex;
         for (var row = 0; row < numRows; row++) {
             const isLast = row == numRows - 1;
             nextProductIndex = productIndex + (isLast ? lastRowCount : 3);
@@ -117,12 +122,12 @@ class GridView extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatch,
     shoppingCartActions : bindActionCreators(ShoppingCartActions, dispatch)
 });
 
 const mapStateToProps = (state) => ({
-    products : state.products
+    products : state.products,
+    paging : state.products.get("paging")
 });
 
 class FilterGrid extends Component {
@@ -143,9 +148,9 @@ class FilterGrid extends Component {
                     <div className="col-md-9">
                         <FilterGridViewController count={products.count()}/>
 
-                        <GridView products={products} addToCart={this.props.shoppingCartActions.addItem}/>
+                        <GridView products={products} addToCart={this.props.shoppingCartActions.addItem} paging={this.props.paging}/>
 
-                        {/*<GridPaginationViewController products={products}/>*/}
+                        <GridPaginationViewController/>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export default class Login extends Component {
                     <div className="row">
 
                         <div className="col-md-7 md-margin-bottom-50">
-                            <h2 className="welcome-title">Welcome to Unify</h2>
+                            <h2 className="welcome-title">Welcome to Bellies Bangles</h2>
                             <p>Suspendisse et tincidunt ipsum, et dignissim urna. Vestibulum nisl tortor, gravida at magna et, suscipit vehicula massa.</p><br/>
                             <div className="info-block-v2">
                                 <i className="icon icon-layers"></i>

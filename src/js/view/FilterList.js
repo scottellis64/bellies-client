@@ -3,8 +3,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {fromJS} from "immutable";
 
-import * as ProductActions from "../actions/ProductActions";
-import * as FilterActions from "../actions/FilterActions";
+import * as ShoppingCartActions from "../actions/ShoppingCartActions";
 
 import {
     BreadCrumbs,
@@ -41,7 +40,8 @@ class ProductRow extends Component {
 
                                 <p className="margin-bottom-20">{this.props.description}</p>
 
-                                <button type="button" className="btn-u btn-u-sea-shop">Add to Cart</button>
+                                <button type="button" className="btn-u btn-u-sea-shop"
+                                        onClick={() => this.props.addToCart(this.props.id, this.props.name, 1, this.props.price)}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -56,12 +56,25 @@ class FilterListComponents extends Component {
         const count = this.props.products.count();
         let productNum = 0;
 
-        const listNodes = this.props.products.map((product, id) => {
+        // total of all products
+        const numPageItems = this.props.paging.get("numPageItems");
+
+        const startIndex = this.props.paging.get("startIndex");
+        const endIndex = this.props.paging.get("endIndex");
+
+        var row = 0;
+        const listNodes = this.props.products.filter((product, id) => {
+            row++;
+            if (row >= startIndex && row <= endIndex) {
+                return true;
+            }
+        }).map((product, id) => {
             const price = "$" + product.get("price");
-            return (
-                <ProductRow key={id} last={productNum++ == count} id={id}
-                    name={product.get("name")} price={price} description={product.get("description")}/>
-            )
+            return(
+                <ProductRow key={id} last={row == endIndex} id={id}
+                            name={product.get("name")} price={price} description={product.get("description")}
+                            addToCart={this.props.addToCart}/>
+            );
         });
 
         return (
@@ -73,13 +86,12 @@ class FilterListComponents extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatch,
-    productActions : bindActionCreators(ProductActions, dispatch),
-    filterActions : bindActionCreators(FilterActions, dispatch)
+    shoppingCartActions : bindActionCreators(ShoppingCartActions, dispatch)
 });
 
 const mapStateToProps = (state) => ({
-    products : state.products
+    products : state.products,
+    paging : state.products.get("paging")
 });
 
 class FilterList extends Component {
@@ -93,7 +105,7 @@ class FilterList extends Component {
 
                     <div className="col-md-9">
                         <FilterGridViewController count={products.count()}/>
-                        <FilterListComponents products={products} />
+                        <FilterListComponents products={products} addToCart={this.props.shoppingCartActions.addItem} paging={this.props.paging}/>
                         <GridPaginationViewController />
                     </div>
                 </div>

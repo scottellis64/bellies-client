@@ -7,6 +7,9 @@ export const APPLY_FILTER = "APPLY_FILTER";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const SET_PRODUCTS = "SET_PRODUCTS";
+export const NEXT_PAGE = "NEXT_PAGE";
+export const PREV_PAGE = "PREV_PAGE";
+export const SET_PAGE = "SET_PAGE";
 
 export const GET_FILTERS = "GET_FILTERS";
 export const GET_FILTER_BY_ID = "GET_FILTER_BY_ID";

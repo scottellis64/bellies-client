@@ -1,6 +1,9 @@
 import {
     GET_PRODUCTS,
-    SET_PRODUCTS
+    SET_PRODUCTS,
+    NEXT_PAGE,
+    PREV_PAGE,
+    SET_PAGE
 } from "../constants/ActionTypes";
 
 export function products() {
@@ -16,4 +19,22 @@ export function setProducts(products) {
     };
 }
 
+export function nextPage() {
+    return {
+        type : NEXT_PAGE
+    };
+}
+
+export function prevPage() {
+    return {
+        type : PREV_PAGE
+    };
+}
+
+export function setPage(page) {
+    return {
+        type : SET_PAGE,
+        page
+    };
+}
 

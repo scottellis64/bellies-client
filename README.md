@@ -24,3 +24,13 @@ And a blog post about adding authentication to a React Flux application: https:/
 Blog post: https://iamalivingcontradiction.wordpress.com/2015/09/21/how-to-use-facebook-login-with-react-and-babel/
 The github that contains the code: https://github.com/supalogix/react-facebook-login-poc
 
+
+npm run buildjs
+gulp minify-css
+git status
+git add .
+git commit -m "..."
+git push
+git push openshift HEAD
+
+
