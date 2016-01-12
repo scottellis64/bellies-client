@@ -5,6 +5,7 @@ import shoppingcart from "./shoppingcart";
 import menudata from "./menudata";
 import products from "./products";
 import checkouttabs from "./checkouttabs";
+import account from "./account";
 
 export default combineReducers({
     billingInfo,
@@ -12,5 +13,6 @@ export default combineReducers({
     menudata,
     products,
     checkouttabs,
+    account,
     router : routerStateReducer
 });

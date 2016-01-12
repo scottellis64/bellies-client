@@ -1,7 +1,33 @@
-import React from "react";
+import React, {Component} from "react";
 import {Link} from "react-router";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
-export default class RegisterAccount extends React.Component {
+import * as AccountActions from "../actions/AccountActions";
+
+const mapStateToProps = (state) => ({
+    account : state.account.toJS()
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    accountActions : bindActionCreators(AccountActions, dispatch)
+});
+
+class RegisterAccount extends Component {
+    makeValueLink(field) {
+        let account = this.props.account;
+        let onChange = this.props.accountActions.setAccountField;
+
+        return {
+            value : this.props.account[field],
+
+            requestChange : function(accountValue) {
+                account[field] = accountValue;
+                onChange(account);
+            }
+        }
+    }
+
     render() {
         return (
             <div className="log-reg-v3 content-md margin-bottom-30">
@@ -36,95 +62,105 @@ export default class RegisterAccount extends React.Component {
                         </div>
 
                         <div className="col-md-5">
-                            <form id="sky-form4" className="log-reg-block sky-form">
-                                <h2>Create New Account</h2>
+                            <h2>Create New Account</h2>
 
-                                <div className="login-input reg-input">
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <section>
-                                                <label className="input">
-                                                    <input type="text" name="firstname" placeholder="First name" className="form-control"/>
-                                                </label>
-                                            </section>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <section>
-                                                <label className="input">
-                                                    <input type="text" name="lastname" placeholder="Last name" className="form-control"/>
-                                                </label>
-                                            </section>
-                                        </div>
-                                    </div>
-                                    <label className="select margin-bottom-15">
-                                        <select name="gender" className="form-control">
-                                            <option value="0" selected disabled>Gender</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                            <option value="3">Other</option>
-                                        </select>
-                                    </label>
-                                    <div className="row margin-bottom-10">
-                                        <div className="col-xs-6">
-                                            <label className="select">
-                                                <select name="month" className="form-control">
-                                                    <option disabled="" selected="" value="0">Month</option>
-                                                    <option>January</option>
-                                                    <option>February</option>
-                                                    <option>March</option>
-                                                    <option>April</option>
-                                                    <option>May</option>
-                                                    <option>June</option>
-                                                    <option>July</option>
-                                                    <option>August</option>
-                                                    <option>September</option>
-                                                    <option>October</option>
-                                                    <option>November</option>
-                                                    <option>December</option>
-                                                </select>
+                            <div className="login-input reg-input">
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <section>
+                                            <label className="input">
+                                                <input type="text" name="firstname" placeholder="First name" className="form-control"
+                                                       valueLink={this.makeValueLink("firstName")}/>
                                             </label>
-                                        </div>
-                                        <div className="col-xs-3">
-                                            <input type="text" name="day" placeholder="Day" className="form-control"/>
-                                        </div>
-                                        <div className="col-xs-3">
-                                            <input type="text" name="year" placeholder="Year" className="form-control"/>
-                                        </div>
+                                        </section>
                                     </div>
-                                    <section>
-                                        <label className="input">
-                                            <input type="text" name="username" placeholder="Username" className="form-control"/>
-                                        </label>
-                                    </section>
-                                    <section>
-                                        <label className="input">
-                                            <input type="email" name="email" placeholder="Email address" className="form-control"/>
-                                        </label>
-                                    </section>
-                                    <section>
-                                        <label className="input">
-                                            <input type="password" name="password" placeholder="Password" id="password" className="form-control"/>
-                                        </label>
-                                    </section>
-                                    <section>
-                                        <label className="input">
-                                            <input type="password" name="passwordConfirm" placeholder="Confirm password" className="form-control"/>
-                                        </label>
-                                    </section>
+                                    <div className="col-sm-6">
+                                        <section>
+                                            <label className="input">
+                                                <input type="text" name="lastname" placeholder="Last name" className="form-control"
+                                                       valueLink={this.makeValueLink("lastName")}/>
+                                            </label>
+                                        </section>
+                                    </div>
                                 </div>
+                                <label className="select margin-bottom-15">
+                                    <select name="gender" className="form-control" valueLink={this.makeValueLink("gender")}>
+                                        <option value="0">Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                </label>
+                                <div className="row margin-bottom-10">
+                                    <div className="col-xs-6">
+                                        <label className="select">
+                                            <select name="month" className="form-control"
+                                                    valueLink={this.makeValueLink("month")}>
+                                                <option value="-1">Month</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div className="col-xs-3">
+                                        <input type="text" name="day" placeholder="Day" className="form-control"
+                                               valueLink={this.makeValueLink("day")}/>
+                                    </div>
+                                    <div className="col-xs-3">
+                                        <input type="text" name="year" placeholder="Year" className="form-control"
+                                               valueLink={this.makeValueLink("year")}/>
+                                    </div>
+                                </div>
+                                <section>
+                                    <label className="input">
+                                        <input type="text" name="username" placeholder="Username" className="form-control"
+                                               valueLink={this.makeValueLink("username")}/>
+                                    </label>
+                                </section>
+                                <section>
+                                    <label className="input">
+                                        <input type="email" name="email" placeholder="Email address" className="form-control"
+                                               valueLink={this.makeValueLink("email")}/>
+                                    </label>
+                                </section>
+                                <section>
+                                    <label className="input">
+                                        <input type="password" name="password" placeholder="Password" id="password" className="form-control"
+                                               valueLink={this.makeValueLink("password")}/>
+                                    </label>
+                                </section>
+                                <section>
+                                    <label className="input">
+                                        <input type="password" name="passwordConfirm" placeholder="Confirm password" className="form-control"
+                                               valueLink={this.makeValueLink("passwordConfirm")}/>
+                                    </label>
+                                </section>
+                            </div>
 
-                                <label className="checkbox margin-bottom-10">
-                                    <input type="checkbox" name="checkbox"/>
-                                    <i></i>
-                                    Subscribe to our newsletter to get the latest offers
-                                </label>
-                                <label className="checkbox margin-bottom-20">
-                                    <input type="checkbox" name="checkbox"/>
-                                    <i></i>
-                                    I have read agreed with the <a href="#">terms &amp; conditions</a>
-                                </label>
-                                <button className="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Create Account</button>
-                            </form>
+                            {/*
+                            <label className="checkbox margin-bottom-10">
+                                <input type="checkbox" name="checkbox"/>
+                                <i></i>
+                                Subscribe to our newsletter to get the latest offers
+                            </label>
+                            <label className="checkbox margin-bottom-20">
+                                <input type="checkbox" name="checkbox"/>
+                                <i></i>
+                                I have read agreed with the <a href="#">terms &amp; conditions</a>
+                            </label>
+                            */}
+                            <button className="btn-u btn-u-sea-shop btn-block margin-bottom-20"
+                                onClick={() => {this.props.accountActions.createAccount(this.state)}}>Create Account</button>
 
                             <div className="margin-bottom-20"></div>
                             <p className="text-center">Already you have an account? <Link key="login_register" to="/login">Sign In</Link></p>
@@ -135,3 +171,5 @@ export default class RegisterAccount extends React.Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterAccount);

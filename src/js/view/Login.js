@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router";
 
 //import "/css/log-reg-v3.css!";
 //import "/css/animate.css!";
@@ -93,7 +94,7 @@ export default class Login extends Component {
                             </form>
 
                             <div className="margin-bottom-20"></div>
-                            <p className="text-center">Don't have account yet? Learn more and <a href="shop-ui-register.html">Sign Up</a></p>
+                            <p className="text-center">Don't have account yet? Learn more and <Link key="register_login" to="/register">Sign Up</Link></p>
                         </div>
 
                     </div>
