@@ -1,7 +1,7 @@
 
 Had some trouble 
 
-1 - rhc ssh proyect-name
+1 - rhc ssh project-name
 2 - cd nodejs
 3 - npm install bower
 4 - cd ..
@@ -32,5 +32,24 @@ git add .
 git commit -m "..."
 git push
 git push openshift HEAD
+
+Setting remote environment settings:
+rhc env-set OPENSHIFT_NODEJS_PORT=3001
+
+some other commands:
+
+rhc env-list
+rhc ssh belliesbanglesapp
+
+installation? sudo gem install rhc; rhc setup; rhc app create belliesbanglesapp nodejs-0.10
+git remote add openshift -f ssh://56620ad37628e1dd790000f4@belliesbanglesapp-jsellis.rhcloud.com/~/git/belliesbanglesapp.git/
+
+rhc app create belliesbanglesapp nodejs-0.10 NPM_CONFIG_PRODUCTION="true"
+
+Production vs. Development Mode:
+Checking a process variable called: process.env.NODE_ENV
+Perhaps this is triggered by the statement above that sets NPM_CONFIG_PRODUCTION="true"?
+
+
 
 

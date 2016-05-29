@@ -1,21 +1,29 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as AccountActions from "../actions/AccountActions";
 
 const mapStateToProps = (state) => ({
-    account : state.account.toJS()
+    account : state.account.toJS(),
+    isLoginPage : state.router.location.pathname.endsWith("login")
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    accountActions: bindActionCreators(AccountActions, dispatch)
 });
 
 class TopBar extends Component {
     render() {
         var accountDiv;
         if (this.props.account.loggedIn) {
-            accountDiv = <li>Hello, {this.props.account.username}</li>
+            accountDiv = <li>Hello, {this.props.account.email} | <div onClick={() => this.props.accountActions.logout()}>Logout</div></li>
         } else {
-            accountDiv = <li><Link key="logintop_link" to="/login">Login</Link> | <Link key="registertop_link" to="/register">Register</Link></li>;
+            const registerPart = <Link key="registertop_link" to="/register">Register</Link>;
+
+            accountDiv = this.props.isLoginPage ?
+                <li>{registerPart}</li> :
+                <li><Link key="logintop_link" to="/login">Login</Link> | {registerPart}</li>
         }
 
         return (

@@ -24,4 +24,10 @@ export const UPDATE_SHIPPING_ADDRESS = "UPDATE_SHIPPING_ADDRESS";
 export const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 export const SET_ACCOUNT_FIELD = "SET_ACCOUNT_FIELD";
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const LOGIN_RESPONSE = "LOGIN_RESPONSE";
+export const SET_LOGIN_FIELD_INVALID = "SET_LOGIN_FIELD_INVALID";
+
+export const SESSION_STATE_KEY = "belliesBangles.sessionState";
+
 

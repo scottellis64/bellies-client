@@ -24,6 +24,7 @@
       "immutable": "npm:immutable@^3.7.5",
       "jquery": "github:components/jquery@^2.1.4",
       "jquery.easing": "npm:jquery.easing@^1.3.2",
+      "ramda": "npm:ramda@^0.20.0",
       "react": "npm:react@^0.14.2",
       "react-dom": "npm:react-dom@^0.14.2",
       "react-redux": "npm:react-redux@^4.0.0",
@@ -35,9 +36,11 @@
       "redux-react-router": "npm:redux-react-router@^1.0.0-beta3",
       "redux-router": "npm:redux-router@^1.0.0-beta4",
       "redux-thunk": "npm:redux-thunk@^1.0.0",
+      "reselect": "npm:reselect@^2.0.3",
       "socket.io": "npm:socket.io@^1.3.7",
       "socket.io-client": "npm:socket.io-client@^1.3.7",
-      "systemjs": "npm:systemjs@^0.19.5"
+      "systemjs": "npm:systemjs@^0.19.5",
+      "validate": "npm:validate@^3.0.1"
     },
     "devDependencies": {
       "babel-runtime": "npm:babel-runtime@^5.8.29",

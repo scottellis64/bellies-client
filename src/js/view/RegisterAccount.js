@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {EMAIL, EQUALS_FIELD, DAY, MONTH, YEAR} from "../constants/ValidationTypes";
 
 import * as AccountActions from "../actions/AccountActions";
 
@@ -12,6 +13,87 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     accountActions : bindActionCreators(AccountActions, dispatch)
 });
+
+const formBuilderDefinitions = {
+    templates : {
+        input : function(input) {
+            return (
+                <section key={input.key}>
+                    <label className="input login-input">
+                        <div className="input-group">
+                            <span className="input-group-addon"><i className={"fa fa-" + input.fieldClass}></i></span>
+                            <input {...input.props}/>
+                        </div>
+                    </label>
+                </section>
+            );
+        },
+        checkbox : function(checkbox) {
+            return (
+                <div className="row margin-bottom-5">
+                    <div className="col-xs-6">
+                        <label className="checkbox">
+                            <input name="checkbox" field="rememberMe"/>
+                            <i></i>
+                            Remember me
+                        </label>
+                    </div>
+                    <div className="col-xs-6 text-right">
+                        <a href="#">Forget your Password?</a>
+                    </div>
+                </div>
+            )
+        }
+    },
+    fields: [{
+        key : "login_email",
+        name: "email",
+        type: "email",
+        template : "input",
+        placeholder: "Email Address",
+        className : "form-control",
+        fieldClass: "user"
+    }, {
+        key : "login_password",
+        name: "password",
+        type: "password",
+        template : "input",
+        placeholder: "Password",
+        className : "form-control",
+        fieldClass: "lock"
+    }],
+
+    format : {
+        firstName : {required : true},
+        lastName : {required : true},
+        email : {
+            required : true,
+            validations : [{
+                type : EMAIL
+            }]
+        },
+        password : {required : true},
+        passwordConfirm : {
+            validations : [{
+                type : EQUALS_FIELD,
+                config : {
+                    field : "passwordConfirm"
+                }
+            }]
+        },
+        month : {validations : [{
+            type : MONTH
+        }]},
+        day : {validations : [{
+            type : DAY
+        }]},
+        year : {validations : [{
+            type : YEAR
+        }]}
+    }
+
+};
+
 
 class RegisterAccount extends Component {
     makeValueLink(field) {
@@ -121,12 +203,6 @@ class RegisterAccount extends Component {
                                                valueLink={this.makeValueLink("year")}/>
                                     </div>
                                 </div>
-                                <section>
-                                    <label className="input">
-                                        <input type="text" name="username" placeholder="Username" className="form-control"
-                                               valueLink={this.makeValueLink("username")}/>
-                                    </label>
-                                </section>
                                 <section>
                                     <label className="input">
                                         <input type="email" name="email" placeholder="Email address" className="form-control"

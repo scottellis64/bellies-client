@@ -1,4 +1,11 @@
-import {CREATE_ACCOUNT, SET_ACCOUNT_FIELD, LOGIN} from "../constants/ActionTypes";
+import {
+    CREATE_ACCOUNT,
+    SET_ACCOUNT_FIELD,
+    LOGOUT,
+    LOGIN,
+    LOGIN_RESPONSE,
+    SET_LOGIN_FIELD_INVALID
+} from "../constants/ActionTypes";
 
 export function createAccount() {
     return {
@@ -6,19 +13,40 @@ export function createAccount() {
     }
 }
 
-export function setAccountField(accountData) {
+export function setField(account) {
     return {
         type : SET_ACCOUNT_FIELD,
-        account : {
-            ...accountData
+        account
+    };
+}
+
+export function login(email, password) {
+    return {
+        type : LOGIN,
+        email,
+        password,
+        meta : {
+            remote : true
         }
     };
 }
 
-export function login(username, password) {
+export function setLoginResponse(account) {
     return {
-        type : LOGIN,
-        username,
-        password
+        type : LOGIN_RESPONSE,
+        account
+    };
+}
+
+export function logout() {
+    return {
+        type : LOGOUT
+    };
+}
+
+export function setFormValidationErrors(formErrors) {
+    return {
+        type : SET_LOGIN_FIELD_INVALID,
+        formErrors
     };
 }

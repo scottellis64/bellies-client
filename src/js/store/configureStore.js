@@ -4,9 +4,8 @@ import routes               from "../routes/index";
 import {reduxReactRouter}   from "redux-router";
 import createHistory        from "history/lib/createBrowserHistory";
 import DevTools             from "../containers/DevTools";
-import serverMiddleware     from "./bellies-server-middleware";
 import io                   from "socket.io-client";
-import {Map}                from "immutable";
+import {fromJS}             from "immutable";
 
 //import {
 //    setProducts
@@ -21,9 +20,14 @@ import {Map}                from "immutable";
 //    setCategories
 //} from "../actions/CategoryActions"
 
+import {
+    setLoginResponse
+} from "../actions/AccountActions";
+
 import {products} from "../actions/ProductActions";
 import {filters} from "../actions/FilterActions"
 
+import {SESSION_STATE_KEY, LOGIN_RESPONSE} from "../constants/ActionTypes";
 
 import {
     applyMiddleware,
@@ -31,29 +35,26 @@ import {
     createStore
 } from "redux";
 
-//const socket = io(`${location.protocol}//${location.hostname}:8090`);
-//socket.on("state", state => {
-//    if (state.products) {
-//        store.dispatch(setProducts(state.products));
-//    }
-//
-//    if (state.filters) {
-//        store.dispatch(setFilters(state.filters));
-//    }
-//
-//    if (state.categories) {
-//        store.dispatch(setCategories(state.categories));
-//    }
-//
-//    if (state.selectedFilters) {
-//        store.dispatch(filtersSelected(state.selectedFilters));
-//    }
-//});
+import {createSelector} from "reselect";
 
-function configureStore(initialState = {}, debug = false) {
+import {
+    sessionStorageSave,
+    belliesServerMiddleware
+} from "../middleware/index";
+
+const socket = io(`${location.protocol}//${location.hostname}:8095`);
+
+socket.on("state", state => {
+    switch (state.action) {
+        case LOGIN_RESPONSE:
+            store.dispatch(setLoginResponse(state.account));
+    }
+});
+
+function configureStore(debug = false) {
     let createStoreWithMiddleware;
 
-    const middleware = applyMiddleware(serverMiddleware(null));
+    const middleware = applyMiddleware(belliesServerMiddleware(socket), sessionStorageSave);
 
     if (debug) {
         createStoreWithMiddleware = compose(
@@ -68,13 +69,25 @@ function configureStore(initialState = {}, debug = false) {
         );
     }
 
+    const storedState = JSON.parse(
+        sessionStorage.getItem(SESSION_STATE_KEY)
+    );
+
+    let initialState = {};
+    if (storedState) {
+        for (var key in storedState) {
+            if( storedState.hasOwnProperty(key) ) {
+                initialState[key] = fromJS(storedState[key]);
+            }
+        }
+    }
+
     return createStoreWithMiddleware(createStore)(
         rootReducer, initialState
     );
 }
 
-
-const store = configureStore({}, true);
+const store = configureStore(true);
 
 //
 // Load all filters and categories

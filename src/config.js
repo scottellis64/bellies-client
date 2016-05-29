@@ -1,7 +1,6 @@
 System.config({
   defaultJSExtensions: true,
   transpiler: "babel",
-  buildCSS: true,
   babelOptions: {
     "stage": 1,
     "optional": [
@@ -13,6 +12,7 @@ System.config({
     "github:*": "lib/github/*",
     "npm:*": "lib/npm/*"
   },
+  buildCSS: true,
 
   map: {
     "babel": "npm:babel-core@5.8.29",
@@ -29,6 +29,7 @@ System.config({
     "jquery.easing": "npm:jquery.easing@1.3.2",
     "lodash": "npm:lodash@3.10.1",
     "omit": "npm:omit@1.0.1",
+    "ramda": "npm:ramda@0.20.0",
     "react": "npm:react@0.14.2",
     "react-dom": "npm:react-dom@0.14.2",
     "react-redux": "npm:react-redux@4.0.0",
@@ -40,9 +41,11 @@ System.config({
     "redux-react-router": "npm:redux-react-router@1.0.0-beta3",
     "redux-router": "npm:redux-router@1.0.0-beta4",
     "redux-thunk": "npm:redux-thunk@1.0.0",
+    "reselect": "npm:reselect@2.0.3",
     "socket.io": "npm:socket.io@1.3.7",
     "socket.io-client": "npm:socket.io-client@1.3.7",
     "systemjs": "npm:systemjs@0.19.5",
+    "validate": "npm:validate@3.0.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -693,6 +696,9 @@ System.config({
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:ramda@0.20.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:randombytes@2.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
@@ -904,6 +910,9 @@ System.config({
       "media-typer": "npm:media-typer@0.3.0",
       "mime-types": "npm:mime-types@2.1.7"
     },
+    "npm:typecast@0.0.1": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0"
+    },
     "npm:ua-parser-js@0.7.9": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
@@ -933,6 +942,11 @@ System.config({
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:validate@3.0.1": {
+      "component-type": "npm:component-type@1.0.0",
+      "eivindfjeldstad-dot": "npm:eivindfjeldstad-dot@0.0.1",
+      "typecast": "npm:typecast@0.0.1"
     },
     "npm:vm-browserify@0.0.4": {
       "indexof": "npm:indexof@0.0.1"
